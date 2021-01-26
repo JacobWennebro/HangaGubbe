@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -32,11 +35,27 @@ public class Main {
         }
     }
 
-    // Method which initializes the game with the given word
-    private void initGame(String word) {
-        String censoredWord = word.replaceAll("[^!.?\\s]", " _ ");
+    public static void promptPlayer(String word, String censoredWord, ArrayList<Character> guessedChars) {
+        Log.GameState(censoredWord, guessedChars);
+        Scanner in = new Scanner(System.in);
+        char guess = in.nextLine().toLowerCase().charAt(0);
 
-        System.out.println(word + " " + censoredWord);
+        // Check if guess is included in word or not.
+        if(word.contains(guess+"")) {
+            for(int i=0; i < censoredWord.length(); i++) {
+                char character = word.charAt(i);
+                if(guess == character) {
+                    char[] chars = censoredWord.toCharArray();
+                    chars[i] = guess;
+                    censoredWord = String.valueOf(chars);
+                }
+            }
+
+        } else {
+            guessedChars.add(guess);
+        }
+
+        promptPlayer(word, censoredWord, guessedChars);
     }
 
     public static void main(String[] args) throws Exception {
@@ -50,7 +69,10 @@ public class Main {
             word = in.nextLine();
         }
 
-        main.initGame(word);
+        String censoredWord = word.replaceAll("[^!.?\\s]", "_");
+        ArrayList<Character> guessedChars = new ArrayList<>();
+
+        promptPlayer(word, censoredWord, guessedChars);
     }
 
 }

@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class Logger {
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_BLACK = "\u001B[30m";
@@ -15,6 +18,10 @@ public class Logger {
 
     public void Prompt(String text) {
         System.out.println(ANSI_CYAN + text + ANSI_WHITE);
+    }
+
+    public void GameState(String censoredWord, ArrayList<Character> guessedWords) {
+        System.out.println(ANSI_GREEN + "\n\n\n\n\n\n\n\nWord: " + censoredWord + "\n\n" + ANSI_RED + "Guesses (" + guessedWords.size() + "): " + guessedWords.toString() + "\n\n" + ANSI_CYAN + "Guess a new letter that has not yet been guessed!");
     }
 
     public void Error(String text) {
