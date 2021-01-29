@@ -35,10 +35,23 @@ public class Main {
         }
     }
 
-    public static void promptPlayer(String word, String censoredWord, ArrayList<Character> guessedChars) {
+    public static void promptPlayer(String word, String censoredWord, ArrayList<Character> guessedChars) throws Exception {
         Log.GameState(censoredWord, guessedChars);
         Scanner in = new Scanner(System.in);
         char guess = in.nextLine().toLowerCase().charAt(0);
+
+        if(guessedChars.size() >= 7) {
+            Log.GameOver(word);
+
+            Scanner in2 = new Scanner(System.in);
+            String res = in2.nextLine();
+
+            if(res.length() == 0 || !(res.toLowerCase().charAt(0) + "").equals("n")) {
+                startGame();
+            }
+
+            return;
+        }
 
         // Check if guess is included in word or not.
         if(word.contains(guess+"")) {
@@ -51,14 +64,14 @@ public class Main {
                 }
             }
 
-        } else {
+        } else if(!guessedChars.contains(guess)) {
             guessedChars.add(guess);
         }
 
         promptPlayer(word, censoredWord, guessedChars);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void startGame() throws Exception {
         String word = "";
 
         if(main.getGameWordConfig() == 1) {
@@ -73,6 +86,10 @@ public class Main {
         ArrayList<Character> guessedChars = new ArrayList<>();
 
         promptPlayer(word, censoredWord, guessedChars);
+    }
+
+    public static void main(String[] args) throws Exception {
+        startGame();
     }
 
 }

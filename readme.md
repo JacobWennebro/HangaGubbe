@@ -6,3 +6,6 @@ Idag har jag spenderat mest tid med att planera spelets struktur och uppbyggnad 
 
 ### Lektion 3
 Idag har jag hunnit med mycket med "gameplay", spelet går att starta och det går att gissa sig fram till ordet samt att spelet håller koll på hur många fel spelaren gjort.
+
+### Lektion 4
+Spelet går nu att starta om ifall du förlorar och visar då en game over screen, visar även antalet gissningar givna till spelaren.
